@@ -11,7 +11,7 @@ Voici un aperçu de la structure du projet :
 ├── docker-compose.yml        # Fichier de configuration Docker Compose
 ├── README.md                 # Ce fichier README
 ├── settings/                 # Dossier contenant les configurations Docker
-│   ├── mariadb/              # Configuration spécifique à MariaDB
+│   ├── mariadb/              # Configuration spécifique à MariaDB (initialisation et autres)
 │   │   └── init.sql          # Script SQL d'initialisation de la base de données
 │   ├── config/               # Dossier contenant la configuration PHP et Apache
 │   │   ├── 000-default.conf  # Configuration Apache (vHost)
@@ -21,11 +21,20 @@ Voici un aperçu de la structure du projet :
 │   ├── public/               # Dossier public contenant l'index.php
 │   │   ├── index.php         # Point d'entrée de l'application PHP
 │   │   └── assets/           # Dossier contenant les images et autres ressources statiques
+│   │       └── imgs/         # Dossier pour les images
 │   └── app/                  # Code de l'application
 │       └── classes/          # Dossier contenant les classes PHP
-├── .env                      # Variables d'environnement pour Docker Compose
-└── mariadb/                  # Dossier contenant les données de la base de données
+│           └── .gitignore    # Fichier .gitignore pour ignorer les fichiers spécifiques à ce répertoire
+└── .env                      # Variables d'environnement pour Docker Compose
 ```
+
+### Explication des sections :
+
+- **Prérequis** : Liste des outils nécessaires pour exécuter ce projet (Docker, Docker Compose).
+- **Installation** : Instructions pour configurer et démarrer le projet sur la machine locale.
+- **Développement** : Explication sur la structure du projet, comment ajouter des extensions PHP, des scripts SQL, et comment modifier la configuration.
+- **Commandes utiles** : Commandes Docker Compose pour gérer les conteneurs (démarrer, arrêter, supprimer volumes).
+<!-- - **Licence** : Optionnelle si tu souhaites spécifier une licence. -->
 
 ## Prérequis
 
@@ -41,8 +50,7 @@ Avant de démarrer, assurez-vous que vous avez installé les éléments suivants
 Clonez ce projet sur votre machine :
 
 ```bash
-git clone <URL de votre dépôt>
-cd <nom-du-dossier>
+git clone https://github.com/Skarbiee/template_mariadb_php8.3-apache.git
 ```
 
 ### 2. Modifier le fichier `.env`
@@ -123,16 +131,8 @@ Si vous devez ajouter d'autres scripts SQL pour initialiser la base de données,
   docker-compose down -v
   ```
 
-## Licence
+<!-- ## Licence
 
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails. -->
 
 ---
-
-### Explication des sections :
-
-- **Prérequis** : Liste des outils nécessaires pour exécuter ce projet (Docker, Docker Compose).
-- **Installation** : Instructions pour configurer et démarrer le projet sur la machine locale.
-- **Développement** : Explication sur la structure du projet, comment ajouter des extensions PHP, des scripts SQL, et comment modifier la configuration.
-- **Commandes utiles** : Commandes Docker Compose pour gérer les conteneurs (démarrer, arrêter, supprimer volumes).
-- **Licence** : Optionnelle si tu souhaites spécifier une licence.
