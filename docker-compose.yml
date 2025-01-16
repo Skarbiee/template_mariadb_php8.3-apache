@@ -1,0 +1,36 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: ./settings/config/Dockerfile
+    volumes:
+      - ./src:/var/www/html
+      - ./settings/config/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./src/public/assets/imgs:/var/www/html/storage # pour le volume de storage
+    ports:
+      - "8080:80"
+    networks:
+      - webnet
+
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./mariadb/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mariadb-data:/var/lib/mysql # pour le volume de mariadb
+    ports:
+      - "3306:3306"
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge
+
+volumes:
+  storage:
+  mariadb-data:
