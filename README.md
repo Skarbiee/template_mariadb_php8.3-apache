@@ -64,7 +64,16 @@ MYSQL_USER=user
 MYSQL_PASSWORD=password
 ```
 
-### 3. Démarrer les services Docker
+### 3. Démarrer un serveur
+
+#### **PHP**
+
+Directement en php il est possible de démarrer un serveur grâce à la commande suivante dans votre bash:
+```bash
+php -S localhost:8080 -t ./src/public
+```
+
+#### **Docker**
 
 Dans le répertoire où se trouve le fichier `docker-compose.yml`, exécutez la commande suivante pour démarrer les conteneurs Docker :
 
@@ -86,7 +95,7 @@ Vous pouvez également vous connecter à la base de données **MariaDB** avec le
 - **Hôte** : `localhost` ou `127.0.0.1`
 - **Utilisateur** : `user`
 - **Mot de passe** : `password`
-- **Base de données** : `apache_db`
+- **Base de données** : `bdd_db`
 
 ### 5. Accéder à MariaDB
 
