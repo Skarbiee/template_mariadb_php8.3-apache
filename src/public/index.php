@@ -1,6 +1,6 @@
 <?php
 // Connexion à la base de données
-$dsn = 'mysql:host=mariadb;dbname=project_db;charset=utf8';
+$dsn = 'mysql:host=mariadb;dbname=bdd_db;charset=utf8';
 $username = 'user';
 $password = 'password';
 
