@@ -15,15 +15,17 @@ class Model extends Database{
     public function where($column, $operator, $value){
         $this->query .= "WHERE " . $column . " $operator : value";
         $this->columns[':value'] = $value;                                  // Ajout de la valeur pour le placeholder
-        return $this;
+        return $this;                                                       // Permet de chaîner les méthodes
     }
 
+    // Méthode pour exécuter la requête et récupérer les résultats
     public function get(){
         $stmt = $this->conn->prepare($this->query);         // Préparation de la requête SQL
         $stmt->execute($this->columns);                    // Exécution de la requête
         return $stmt->fetchAll(PDO::FETCH_ASSOC);                  // Retourne tous les résultats sous forme de tableau associatif
     }
 
+    // Méthode pour sélectionner une colonne spécifique
     public function select($columns){
         $this->query = "SELECT " . implode(',', (array) $columns) . " FROM " . $this->table; // Construction de la requête avec les colunnes spécifiées
         return $this;
@@ -38,47 +40,24 @@ class Model extends Database{
         return $stmt->execute($data);                                                     // Exécution de la requête avec les données à insérer
     }
 
-    public function hasOne($relatedModel, $foreignKey){
-        $related = new $relatedModel();                                                                     // Crée une instance du modèle lié
-        $relatedTable = $related->table;
-        $this->query .= " LEFT JOIN $relatedTable ON $relatedTable.$foreignKey = " . $this->table . ".id";
-        return $this;                                                                                       // Permet de chaîner
-    }
-
-    public function hasMany($relatedModel, $foreignKey){
-        $related = new $relatedModel();                                                                     // Crée une instance du modèle lié
-        $relatedTable = $related->table;
-        $this->query .= " LEFT JOIN $relatedTable ON $relatedTable.$foreignKey = " . $this->table . ".id";
-        return $this;                                                                                       // Permet de chaîner
-    }
-
-    // Méthode pour remplacer un enregistrement dans la base de données
+    // Méthode pour remplacer un enregistrement
     public function replace($data){
         // On extrait les colonnes et leurs valeurs
-        $columns = implode(',', array_keys($data));                 // Colonnes à insérer ou mettre à jour
-        $placeholders = ":" . implode(',:', array_keys($data));     // Placeholders pour les valeurs
-
-        // Construction de la requete REPLACE INTO
-        $this->query = "REPLACE INTO " . $this->table . " ($columns) VALUES ($placeholders)";
-
-        // Préparation et exécution de la requête
-        $stmt = $this->conn->prepare($this->query);
-        return $stmt->execute($data);               // Retourner true si l'opération a réussi
+        $columns = implode(',', array_keys($data));                         // Colonnes à insérer ou mettre à jour
+        $placeholders = ":" . implode(',:', array_keys($data));             // Placeholders pour les valeurs
+        $this->query = "REPLACE INTO " . $this->table . " ($columns) VALUES ($placeholders)"; // Construction de la requete REPLACE INTO
+        $stmt = $this->conn->prepare($this->query);                                    // Préparation et exécution de la requête
+        return $stmt->execute($data);                                                 // Retourner true si l'opération a réussi
     }
 
     // Méthode pour supprimer un enregistrement de la base de données
     public function delete(){
-        // Construction de la requête DELETE
-        $this->query = "DELETE FROM " . $this->table;
-
-        //Si des conditions WHERE sont définies, on les ajoute à la requête
-        if(!empty($this->columns)){
-            $this->query .= " WHERE " . key($this->columns) . " = :" . key($this->columns);
+        $this->query = "DELETE FROM " . $this->table;                                                        // Construction de la requête DELETE
+        if(!empty($this->columns)){                                                                          //Si des conditions WHERE sont définies, on les ajoute à la requête
+            $this->query .= " WHERE " . key($this->columns) . " = :" . key($this->columns);    // Exécution de la requête de suppression
         }
-
-        // Préparation et exécution de la requête
-        $stmt = $this->conn->prepare($this->query);
-        return $stmt->execute($this->columns);                        // Retourne true si la suppression a réussi
+        $stmt = $this->conn->prepare($this->query);                                                   // Préparation et exécution de la requête
+        return $stmt->execute($this->columns);                                                       // Retourne true si la suppression a réussi
     }
 
     // Méthode pour définir une relation BelongsTo
@@ -87,5 +66,21 @@ class Model extends Database{
         $relatedTable = $related->table;
         $this->query .= " LEFT JOIN $relatedTable ON $relatedTable.id = " . $this->table . "." . $foreignKey;
         return $this;                                                                                           // Permet de chaîner
+    }
+
+    
+    public function hasOne($relatedModel, $foreignKey){
+        $related = new $relatedModel();                                                                     // Crée une instance du modèle lié
+        $relatedTable = $related->table;
+        $this->query .= " LEFT JOIN $relatedTable ON $relatedTable.$foreignKey = " . $this->table . ".id";
+        return $this;                                                                                       // Permet de chaîner
+    }
+
+    // Méthode pour définir une relation hasMany
+    public function hasMany($relatedModel, $foreignKey){
+        $related = new $relatedModel();                                                                     // Crée une instance du modèle lié
+        $relatedTable = $related->table;
+        $this->query .= " LEFT JOIN $relatedTable ON $relatedTable.$foreignKey = " . $this->table . ".id";
+        return $this;                                                                                       // Permet de chaîner
     }
 }
