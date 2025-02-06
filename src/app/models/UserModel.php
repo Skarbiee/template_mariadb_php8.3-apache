@@ -17,7 +17,9 @@ class UserModel extends Model
 
     // Méthode pour supprimer un utilisateur
     public function deleteById($id){
-        $this->delete(); // Exécute la suppression de l'utilisateur
+        $this->query = "DELETE FROM " . $this->table . " WHERE id = :id";   // Construction de la requête
+        $stmt = $this->conn->prepare($this->query);                  // Préparation de la requête avec PDO
+        return $stmt->execute([':id' => $id]);                      // Exécution avec le paramètre ID
     }
 
     // Relation "hasOne" avec UserInfoModel
