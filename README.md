@@ -10,22 +10,37 @@ Voici un aperçu de la structure du projet :
 ./
 ├── docker-compose.yml        # Fichier de configuration Docker Compose
 ├── README.md                 # Ce fichier README
-├── settings/                 # Dossier contenant les configurations Docker
-│   ├── mariadb/              # Configuration spécifique à MariaDB (initialisation et autres)
-│   │   └── init.sql          # Script SQL d'initialisation de la base de données
-│   ├── config/               # Dossier contenant la configuration PHP et Apache
-│   │   ├── 000-default.conf  # Configuration Apache (vHost)
-│   │   ├── Dockerfile        # Dockerfile pour le conteneur PHP
-│   │   └── entrypoint.sh     # Script d'entrée pour le conteneur PHP
-├── src/                      # Code source de l'application
-│   ├── public/               # Dossier public contenant l'index.php
-│   │   ├── index.php         # Point d'entrée de l'application PHP
-│   │   └── assets/           # Dossier contenant les images et autres ressources statiques
-│   │       └── imgs/         # Dossier pour les images
-│   └── app/                  # Code de l'application
-│       └── classes/          # Dossier contenant les classes PHP
-│           └── .gitignore    # Fichier .gitignore pour ignorer les fichiers spécifiques à ce répertoire
-└── .env                      # Variables d'environnement pour Docker Compose
+├── settings/                   # Dossier contenant les configurations Docker
+│   ├── mariadb/                  # Configuration spécifique à MariaDB (initialisation et autres)
+│   │   └── init.sql              # Script SQL d'initialisation de la base de données
+│   ├── config/                 # Dossier contenant la configuration PHP et Apache
+│   │   ├── 000-default.conf      # Configuration Apache (vHost)
+│   │   ├── Dockerfile            # Dockerfile pour le conteneur PHP
+│   │   └── entrypoint.sh         # Script d'entrée pour le conteneur PHP
+├── src/                          # Code source de l'application
+│   ├── public/                 # Dossier public contenant l'index.php
+│   │   ├── .htaccess             # Fichier .htaccess pour la redirection des requêtes
+│   │   ├── index.php             # Fichier d'index de l'application
+│   │   └── assets/             # Dossier contenant les images et autres ressources statiques
+│   │       └── imgs/           # Dossier pour les images
+│   ├── app/                      # Code de l'application
+│   │   ├── classes/            # Dossier contenant les classes PHP
+│   │   │   └── .gitignore        # Fichier .gitignore pour ignorer les fichiers spécifiques à ce répertoire
+│   │   ├── core/               # Dossier contenant le code du noyau de l'application
+│   │   │   ├── Model.php         # Classe Model pour la gestion des données
+│   │   │   └── Database.php      # Classe Database pour la connexion à la base de données (PDO)
+│   │   ├── controllers/        # Dossier contenant les contrôleurs de l'application
+│   │   ├── models/             # Dossier contenant les modèles de l'application
+│   │   └── views/              # Dossier contenant les vues de l'application
+│   │       ├── 404.php
+│   │       ├── contact.php
+│   │       ├── home.php
+│   │       └──layouts/         # Dossier contenant les layouts de l'application
+│   │           ├── footer.php    # Fichier de layout pour le pied de page
+│   │           ├── head.php      # Fichier de layout pour la balise <head>
+│   │           └── header.php    # Fichier de layout pour le haut de page
+│   └── docs/                   # Dossier contenant la documentation de l'application
+└── .env                          # Variables d'environnement pour Docker Compose
 ```
 
 ### Explication des sections :
