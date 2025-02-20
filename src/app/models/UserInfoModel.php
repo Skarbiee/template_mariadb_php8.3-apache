@@ -1,4 +1,7 @@
 <?php
+namespace App\Models;
+
+use App\Core\Model;
 class UserInfoModel extends Model{
     protected $table = 'users_infos'; // nom de la table
 

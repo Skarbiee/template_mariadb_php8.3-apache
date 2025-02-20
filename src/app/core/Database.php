@@ -1,4 +1,9 @@
 <?php
+namespace App\Core;
+
+use PDO;
+use PDOException;
+
 class Database {
     private $host = 'mariadb';      // hôte de la base de données
     private $db_name = 'bdd_db';    // nom de la base de données

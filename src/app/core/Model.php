@@ -1,4 +1,9 @@
 <?php
+namespace App\Core;
+
+use App\Core\Database;
+use PDO;
+
 class Model extends Database {
 
 
@@ -100,3 +105,6 @@ class Model extends Database {
     }
 }
 ?>
+
+<!-- NOUVEAU MODEL MVC -->
+ 

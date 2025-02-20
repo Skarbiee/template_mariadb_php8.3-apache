@@ -1,8 +1,14 @@
 <?php
+namespace Public;
 
-require_once '../app/core/Functions.php';
+use App\Core\Autoloader;
+use function App\Core\displayErrorsPHP;
+use function App\Core\dd;
+
+require_once '../app/core/Autoloader.php';
+Autoloader::register();
+
 displayErrorsPHP();
-
 dd(getenv());
 
 $request = $_SERVER['REQUEST_URI'];

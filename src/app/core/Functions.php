@@ -1,10 +1,12 @@
 <?php
+namespace App\Core;
+
+use PDO;
 
 define('APP_DIR', '../app');
 define('CORE_DIR', APP_DIR.'/core');
 define('VIEW_DIR', APP_DIR.'views');
 define('DEBUG', false);
-
 
 function displayErrorsPHP() {
     if (DEBUG) {
@@ -13,6 +15,7 @@ function displayErrorsPHP() {
         error_reporting(E_ALL);
     }
 }
+
 function dd(...$vars) {
     if (DEBUG) {
         ddf(...$vars);
