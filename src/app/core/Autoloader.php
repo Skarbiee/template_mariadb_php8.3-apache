@@ -30,8 +30,8 @@ class Autoloader
             'App\\Models\\'      => '../app/models/',
             'App\\Services\\'    => '../app/services/',
         ];
-        if(self::searchClass($class, $directories)) {
-            return;
+        if(!self::searchClass($class, $directories)) {
+            throw new \Exception("Class $class not found.");
         }
     }
 
