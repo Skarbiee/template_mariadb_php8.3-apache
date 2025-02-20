@@ -1,4 +1,10 @@
 RewriteEngine On
+
+# Route pour l'API
+RewriteCond %{REQUEST_URI} ^/api/article [NC]
+RewriteRule ^api/article$ /app/views/api/article.php [L]
+
+# Routes générales
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)$ index.php [QSA,L]
