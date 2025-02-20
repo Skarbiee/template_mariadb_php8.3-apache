@@ -30,4 +30,31 @@ class UserModel extends Model
     public function userInfo(){
         return $this->hasOne('UserInfoModel', 'user_id'); // Relation entre 'users' et 'users_infos'
     }
+
+    // Exemple de méthode pour enregistrer un utilisateur 
+    public function registerUser($login, $password) { 
+        try {
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+            // Utilisation de la méthode insert() déjà existante
+            $result = $this->insert([
+                'login' => $login,
+                'password' => $hashedPassword
+            ]);
+
+            /*
+            // On peut toujours retourner le résultat de l'insertion
+            return $this->insert([
+                'login' => $login,
+                'password' => $hashedPassword
+            ]);
+            */
+
+            // On retourne true en cas de succès sans exposer de données sensibles
+            return $result ? true : false;
+        } catch (\Exception $e) {
+            // On retourne false en cas d'erreur
+            return false;
+        }
+    }
 }

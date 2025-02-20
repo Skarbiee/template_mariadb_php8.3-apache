@@ -7,7 +7,7 @@ use PDOException;
 class Database {
     private $host = 'mariadb';      // hôte de la base de données
     private $db_name = 'bdd_db';    // nom de la base de données
-    private $username = 'root';     // utilisateur de la base de données
+    private $username = 'user';     // utilisateur de la base de données
     private $password = '*';        // mot de lpasse de l'utilisateur
     public $conn;                   // la connexion PDO
 
