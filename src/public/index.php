@@ -2,6 +2,7 @@
 
 use App\Core\Autoloader;
 use function App\Core\displayErrorsPHP;
+use function App\Core\dd;
 
 require_once '../app/core/Autoloader.php';
 require_once '../app/core/Functions.php';
