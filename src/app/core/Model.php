@@ -5,9 +5,8 @@ use App\Core\Database;
 use PDO;
 
 class Model extends Database {
-
-
     protected $table;           // Le nom de la table associée au model
+    protected $id;              // La clé primaire de la table
     protected $columns = [];    // Les colonnes de la table
     protected $query;           // Requête SQL
     private $query_origin = "SELECT * FROM ";
